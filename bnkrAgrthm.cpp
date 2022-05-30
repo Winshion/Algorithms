@@ -5,19 +5,19 @@
 using namespace std;
 
 bool checkFinish(vector<bool> finish) {
-	// ¼ì²éfinishÏòÁ¿ÊÇ²»ÊÇÈ«true
-	// Ö»ÒªÓĞfalse£¬¾Í·µ»Øtrue
+	// æ£€æŸ¥finishå‘é‡æ˜¯ä¸æ˜¯å…¨true
+	// åªè¦æœ‰falseï¼Œå°±è¿”å›true
 	for (int i = 0; i < finish.size(); i++)
 		if (finish[i] == false) return true;
 	return false;
 }
 
 bool checkAvai(vector<int> arr, vector<int> available, bool b) {
-	// ¼ì²éÎÒ¿É²»¿ÉÒÔ¸øµ±Ç°½ø³Ì·ÖÅä×ÊÔ´
+	// æ£€æŸ¥æˆ‘å¯ä¸å¯ä»¥ç»™å½“å‰è¿›ç¨‹åˆ†é…èµ„æº
 	if (b) return false;
 	for (int i = 0; i < available.size(); i++)
-		if (available[i] < arr[i])	// Ö»ÒªÒ»²»¹»
-			return false;			// ¾Í·µ»Øfalse
+		if (available[i] < arr[i])	// åªè¦ä¸€ä¸å¤Ÿ
+			return false;			// å°±è¿”å›false
 	return true;
 }
 
@@ -53,21 +53,21 @@ vector<int> bnkrAlg(vector<vector<int>>& allocation, vector<vector<int>>& mmax,
 	vector<int> work;
 	vector<int> result;
 	for (int i = 0; i < proc_num; i++)
-		Need.push_back(mmax[i] - allocation[i]);	// ¼ÆËãNeed¾ØÕó
+		Need.push_back(mmax[i] - allocation[i]);	// è®¡ç®—NeedçŸ©é˜µ
 	show<vector<vector<int>>>(Need, "Need");
 	vector<bool> finish;
 	for (int i = 0; i < proc_num; i++)
-		finish.push_back(false);	// ¹¹ÔìfinishÏòÁ¿
+		finish.push_back(false);	// æ„é€ finishå‘é‡
 	for (int cnt = 0; cnt < proc_num; cnt++) {
-		// °´ÕÕµÀÀí£¬Èô´æÔÚËÀËø£¬Ôò½øĞĞn´Î£¨nÎª½ø³ÌÊı£©ºó¾ÍÄÜ¼ì²â³öÀ´¡£
-		// ÕâÒ»²¿·Ö¿ªÊ¼,´û¿î
+		// æŒ‰ç…§é“ç†ï¼Œè‹¥å­˜åœ¨æ­»é”ï¼Œåˆ™è¿›è¡Œnæ¬¡ï¼ˆnä¸ºè¿›ç¨‹æ•°ï¼‰åå°±èƒ½æ£€æµ‹å‡ºæ¥ã€‚
+		// è¿™ä¸€éƒ¨åˆ†å¼€å§‹,è´·æ¬¾
 		work = available;
 		cout << "Resources available now: " << endl;
 		for (int i = 0; i < work.size(); i++) cout << work[i] << '\t';
 		cout << endl;
 		for (int i = 0; i < proc_num; i++) {
-			// ½øĞĞÒ»´Î´û¿îÂÖ»Ø
-			if (checkAvai(Need[i], work, finish[i])) {	// Èç¹ûµ±Ç°×ÊÔ´¿É¹©·ÖÅä¸øÕâ¸öÎ´Íê³ÉµÄ½ø³Ì
+			// è¿›è¡Œä¸€æ¬¡è´·æ¬¾è½®å›
+			if (checkAvai(Need[i], work, finish[i])) {	// å¦‚æœå½“å‰èµ„æºå¯ä¾›åˆ†é…ç»™è¿™ä¸ªæœªå®Œæˆçš„è¿›ç¨‹
 				work = work - Need[i];
 				available = available - Need[i];
 				available = available + mmax[i];
@@ -87,8 +87,8 @@ int main() {
 	vector<vector<int>> allocation, mmax;
 	vector<int> available;
 	int proc_num, rsc_num;
-	int temp;	// ÊäÈëÊı×éÊ¹ÓÃ
-	vector<int> v;	// ÊäÈëÊı×éÊ¹ÓÃ
+	int temp;	// è¾“å…¥æ•°ç»„ä½¿ç”¨
+	vector<int> v;	// è¾“å…¥æ•°ç»„ä½¿ç”¨
 	cout << "Input the number of proccesses." << endl;
 	cin >> proc_num;
 	cout << "Input the number of resources." << endl;
@@ -129,5 +129,6 @@ int main() {
 	for (int i = 0; i < result.size(); i++)
 		cout << "P" << result[i] << " ";
 	cout << endl;
+	system("pause");
 	return 0;
 }
